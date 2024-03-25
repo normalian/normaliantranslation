@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NormalianTranslation.Web", "NormalianTranslation.Web\NormalianTranslation.Web.csproj", "{7A1D891F-C021-4F4F-BA0E-0CABE23C6752}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NormalianTranslation.Function", "NormalianTranslation.Function\NormalianTranslation.Function.csproj", "{77858A1F-7795-4884-B4E5-A566EBFD18FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A1D891F-C021-4F4F-BA0E-0CABE23C6752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A1D891F-C021-4F4F-BA0E-0CABE23C6752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A1D891F-C021-4F4F-BA0E-0CABE23C6752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A1D891F-C021-4F4F-BA0E-0CABE23C6752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77858A1F-7795-4884-B4E5-A566EBFD18FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77858A1F-7795-4884-B4E5-A566EBFD18FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77858A1F-7795-4884-B4E5-A566EBFD18FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77858A1F-7795-4884-B4E5-A566EBFD18FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD08CEA0-2D0F-4E87-99ED-976BF99EC70B}
+	EndGlobalSection
+EndGlobal

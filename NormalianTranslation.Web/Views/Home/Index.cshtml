@@ -1,0 +1,113 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div id="alert-success" class="alert alert-success" role="alert">
+</div>
+<div id="alert-danger" class="alert alert-danger" role="alert">
+</div>
+@using (Html.BeginForm("UploadFiles", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "uploadForm" }))
+{
+    <input type="button" id="send" value="upload" />
+    <div class="text-center">
+        <p>Select your target language to translate for your decks.</p>
+        <select name="target_language" id="target_language">
+            <option value="en">English</option>
+            <option value="ja" selected>Japanese</option>
+        </select>
+    </div>
+    <div class="text-center">
+        <div id="drop-area">
+            <span>Drag and drop your files here to translate.</span>
+        </div>
+        <ul id="file-list"></ul>
+        <br />
+    </div>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#alert-success').hide();
+            $('#alert-danger').hide();
+            var formData = new FormData();
+
+            $('#drop-area').on('dragover', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).css('border', '2px dashed #0B85A1');
+            });
+
+            $('#drop-area').on('dragleave', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).css('border', '2px dashed #ccc');
+            });
+
+            $('#drop-area').on('drop', function (e) {
+                if (e.originalEvent.dataTransfer) {
+                    if (e.originalEvent.dataTransfer.files.length) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        $(this).css('border', '2px dashed #ccc');
+                        upload(e.originalEvent.dataTransfer.files);
+                    }
+                }
+            });
+
+            function upload(files) {
+                $('#alert-success').hide();
+                $('#alert-danger').hide();
+                $('#alert-success').empty();
+                $('#alert-danger').empty();
+                for (var i = 0; i < files.length; i++) {
+                    displayFile(files[i]);
+                    formData.append('file', files[i]);
+                }
+                console.log(formData);
+                $('#send').prop("disabled", false);
+            }
+
+            function displayFile(file) {
+                const list = $('#file-list');
+                const listItem = $('<li>').text(`${file.name} - ${file.size} bytes`);
+                list.append(listItem);
+            }
+
+            $('#send').prop("disabled", true);
+
+            $('#send').click(function () {
+                formData.append('target_language', $('#target_language').val());
+                console.log(formData);
+                $.ajax({
+                    url: '/Home/UploadFiles',
+                    type: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (ret) {
+                        if (ret.message) {
+                            $('#alert-success').show();
+                            $('#alert-success').text(ret.message);
+                            $('#file-list').empty();
+                        }
+                        else if (ret.error) {
+                            $('#alert-danger').show();
+                            $('#alert-danger').text(ret.error);
+                            $('#file-list').empty();
+                        }
+                    }
+                    // ,error: function (ret) {
+                    //     $('#alert-danger').text(ret.message);
+                    // }
+                });
+                formData.delete('file');
+                $('#file-list').empty();
+                const listItem = $('<li>').text(`uploading files... Do not refresh browser.`);
+                $('#file-list').append(listItem);
+                $('#send').prop("disabled", true);
+            });
+
+        });
+    </script>
+}
